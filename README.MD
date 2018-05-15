@@ -1,0 +1,1 @@
+Dit is een schoolproject voor gameartists en gamedevelopers op het Mediacollege in Amsterdam.
