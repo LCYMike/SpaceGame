@@ -5,78 +5,59 @@ public class RocketController : MonoBehaviour {
     public float thrust = 1f;
     private float distance = 1.5f;
 
-    private bool isLeft = false;
-    private bool isRight = false;
+    private float cooldown = 0.2f;
 
     public CameraController cam;
 
-    Rigidbody2D rb;
-
     void Start () {
-        rb = GetComponent<Rigidbody2D>();
         cam = FindObjectOfType<CameraController>();
 	}
-	
-	void FixedUpdate ()
+
+    void FixedUpdate()
     {
+        float x = transform.position.x;
+
         //Upward Movement
         transform.Translate(new Vector2(0, (thrust / 10) * Time.deltaTime));
 
+        cooldown = cooldown -= Time.deltaTime;
 
-
-        //Controld for going Left
-
-        //Checks position and input
-        if (Input.GetKeyDown(KeyCode.A) && !isLeft)
+        //Controld for going Left & Right
+        if (cooldown <= 0)
         {
-            //Moves Player
-            transform.Translate(new Vector2(-distance, 0));
-
-            //Corrects Camera So it will stay in it's position
-            cam.goLeft(distance);
-
-            //Checks the position
-            if (isRight)
+            //Checks position and input
+            if (Input.GetKeyDown(KeyCode.A) && x > -1)
             {
-                isLeft = false;
-            }
-            else
-            {
-                isLeft = true;
+                //Moves Player
+                transform.Translate(new Vector2(-distance, 0));
+
+                //Corrects Camera So it will stay in it's position
+                cam.goLeft(distance);
+
+                //resets cooldown
+                cooldown = 0.2f;
             }
 
-            if (isRight)
-                isRight = false;
+            //Checks position and input
+            if (Input.GetKeyDown(KeyCode.D) && x < 1)
+            {
+                //Moves Player
+                transform.Translate(new Vector2(distance, 0));
+
+                //Corrects Camera So it will stay in it's position
+                cam.goRight(-distance);
+
+                //resets cooldown
+                cooldown = 0.2f;
+            }
+
         }
 
-        //Controld for going Right
-
-        //Checks position and input
-        if (Input.GetKeyDown(KeyCode.D) && !isRight)
-        {
-            //Moves Player
-            transform.Translate(new Vector2(distance, 0));
-
-            //Corrects Camera So it will stay in it's position
-            cam.goRight(-distance);
-
-            //Checks the position
-            if (isLeft)
-            {
-                isRight = false;
-            } else
-            {
-                isRight = true;
-            }
-
-            if (isLeft)
-                isLeft = false;
-        }
     }
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.transform.tag == "Obstacle")
+        if (col.gameObject.tag == "Obstacle")
         {
             Debug.Log("We hit : " + col.transform.name);
         }
