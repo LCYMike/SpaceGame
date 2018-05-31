@@ -2,23 +2,48 @@
 
 public class RocketController : MonoBehaviour {
 
-    public float thrust = 1f;
+    public float thrust = 80f;
     private float distance = 1.5f;
 
     private float cooldown = 0.2f;
 
+    private Obstacle obs;
+    private BackgroundTile backg;
+
     public CameraController cam;
+    private BackgroundTile backTile;
 
     void Start () {
         cam = FindObjectOfType<CameraController>();
+        backg = FindObjectOfType<BackgroundTile>();
 	}
 
     void FixedUpdate()
     {
+        //if (transform.position.y >= 212)
+        //{
+        //    Debug.Log(Time.timeScale);
+        //    if (Time.timeScale > 0.000f)
+        //    {
+        //        Time.timeScale = Time.timeScale - 0.01f;
+        //    }
+        //}
+
+        backTile.UpdatePlayerTransform(transform.position);
+
+        if (thrust < 80)
+        {
+            thrust += 0.15f;
+        }
+
         float x = transform.position.x;
 
+        Vector2 velocity = new Vector2(0, (thrust / 10));
+
         //Upward Movement
-        transform.Translate(new Vector2(0, (thrust / 10) * Time.deltaTime));
+        transform.Translate(velocity * Time.deltaTime);
+
+        backg.Scroll(thrust / 10);
 
         cooldown = cooldown -= Time.deltaTime;
 
@@ -55,12 +80,9 @@ public class RocketController : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider col)
+    public void astroidHit(float speed)
     {
-        if (col.gameObject.tag == "Obstacle")
-        {
-            Debug.Log("We hit : " + col.transform.name);
-        }
+        thrust = thrust -= speed;
     }
 
 }

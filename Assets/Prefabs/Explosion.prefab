@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4403587078655664}
   - component: {fileID: 198597538837621070}
   - component: {fileID: 199151446115374530}
+  - component: {fileID: 114298082202921102}
+  - component: {fileID: 114851148303230646}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -35,12 +37,34 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1130971387764002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.51, y: 4.51, z: -3.75}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114298082202921102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130971387764002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29f30db903cb574bacac0dd22a343cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114851148303230646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130971387764002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac754f7e16a71b4f8afbd8ce81cbf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198597538837621070
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3417,7 +3441,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9f0801685aeb79e42a19a2025a75850f, type: 2}
+  - {fileID: 2100000, guid: fcb9e7c50237bdf4388df51d4cbc5efe, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
